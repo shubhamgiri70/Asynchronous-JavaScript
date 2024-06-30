@@ -23,9 +23,9 @@ const imageRender = (url) => {
   fetch(url)
     .then((res) => res.json())
     .then((res) => {
-      if (res.results.length) {
-        displayImage(res);
-      } else if (res.results){
+      if (res.results) {
+        displayImage(res.results);
+      } else {
         displayImage(res);
       }
     });
