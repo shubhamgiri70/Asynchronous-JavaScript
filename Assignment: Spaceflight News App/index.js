@@ -4,25 +4,38 @@ const root = document.querySelector(".news");
 const select = document.querySelector("#sources");
 let allData = [];
 
-fetch(url)
-  .then((res) => res.json())
-  .then((appData) => {
-    const allSources = new Set();
-    allData = appData.articles;
-    allData.forEach((data) => {
-      createUI(data);
-      allSources.add(data.source.name);
+function handleSpinner(status = false) {
+  if (status) {
+    root.innerHTML = `<div class="donut"></div>`;
+  }
+}
+
+function inIt() {
+  handleSpinner(true);
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((appData) => {
+      const allSources = new Set();
+      allData = appData.articles;
+      allData.forEach((data) => {
+        createUI(data);
+        allSources.add(data.source.name);
+      });
+      isLoading = false;
+      handleSpinner();
+      displayOptions(allSources);
+    })
+    .catch((error) => {
+      console.log("Something went wrong!", error);
     });
-    displayOptions(allSources);
-  })
-  .catch((error) => {
-    console.log("Something went wrong!", error);
-  });
+}
 
 function createUI(data) {
   const li = document.createElement("li");
   const img = document.createElement("img");
   img.src = data.urlToImage;
+  img.alt = data.title;
   const div = document.createElement("div");
   const span = document.createElement("span");
   span.classList.add("source");
@@ -58,3 +71,5 @@ select.addEventListener("change", (event) => {
     createUI(data);
   });
 });
+
+inIt();
