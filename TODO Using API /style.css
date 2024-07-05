@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  background-color: bisque;
+}
+
+header {
+  text-align: center;
+  background-color: black;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  padding: 1rem;
+  color: whitesmoke;
+}
+
+main {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.parent {
+  border: 1px solid black;
+  text-align: center;
+  background-color: aliceblue;
+}
+
+#input {
+  margin: 1.3rem;
+  width: 90%;
+  padding: 0.7rem;
+}
+
+.todos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.3rem;
+}
