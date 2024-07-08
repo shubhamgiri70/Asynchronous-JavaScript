@@ -153,3 +153,8 @@ button {
   color: white;
   cursor: pointer;
 }
+
+/* .all-btns {
+  display: flex;
+  justify-content: space-between;
+} */
