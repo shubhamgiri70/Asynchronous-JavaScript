@@ -28,6 +28,7 @@ main {
   border: 1px solid black;
   text-align: center;
   background-color: aliceblue;
+  margin-bottom: 0.8rem;
 }
 
 #input {
@@ -41,4 +42,17 @@ main {
   align-items: center;
   justify-content: space-between;
   margin: 1.3rem;
+}
+
+.all-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: rgb(18, 122, 118);
+  padding: 0.5rem;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
