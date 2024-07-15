@@ -4,44 +4,61 @@ let completeBtn = document.querySelector(".complete-btn");
 let activeBtn = document.querySelector(".active-btn");
 let clearBtn = document.querySelector(".clear-btn");
 
+function ele(type, attr = {}, ...children) {
+  let element = document.createElement(type);
+  for (let key in attr) {
+    element[key] = attr[key];
+  }
+  children.forEach((child) => {
+    if (typeof child === "object") {
+      element.append(child);
+    }
+    if (typeof child === "string") {
+      let node = document.createTextNode(child);
+      element.append(child);
+    }
+  });
+  return element;
+}
+
 // this is the function for creating UI
 
 function createUI(inputValue, isChecked = false) {
-  let div = document.createElement("div");
-  div.classList.add("todos");
+  let div = ele(
+    "div",
+    { className: "todos" },
+    ele("input", {
+      type: "checkbox",
+      className: "input-checkbox",
+      checked: isChecked,
+    }),
+    ele("p", {}, `${inputValue}`),
+    ele("span", {}, "❌")
+  );
 
-  let inputCheckbox = document.createElement("input");
-  inputCheckbox.type = "checkbox";
-  inputCheckbox.classList.add("input-checkbox");
-  inputCheckbox.checked = isChecked;
+  let inputCheckbox = div.querySelector(".input-checkbox");
+  let p = div.querySelector("p");
+  let span = div.querySelector("span");
 
   inputCheckbox.addEventListener("change", () => {
     p.style.textDecoration = inputCheckbox.checked ? "line-through" : "none";
     saveTodos();
   });
 
-  let p = document.createElement("p");
-  p.innerText = `${inputValue}`;
-  p.style.cursor = "pointer";
-  p.style.fontSize = "1.3rem";
   p.style.textDecoration = isChecked ? "line-through" : "none";
 
   p.addEventListener("dblclick", () => handleEditTodo(p, div));
 
-  let span = document.createElement("span");
-  span.innerText = "❌";
-  span.style.cursor = "pointer";
   span.addEventListener("click", () => {
     div.remove();
     saveTodos();
   });
 
-  div.append(inputCheckbox, p, span);
   root.append(div);
   saveTodos();
 }
 
-// this is the function for handle double click on the todo to edit and rename
+// this is the function to handle double click on the todo to edit and rename
 
 const handleEditTodo = (p, div) => {
   let editInput = document.createElement("input");
@@ -80,7 +97,6 @@ const handleCompleteBtn = () => {
     todo.style.display = todoCheckbox.checked ? "flex" : "none";
   });
 };
-
 
 // this is the function for saving todos
 
