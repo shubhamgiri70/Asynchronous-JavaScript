@@ -44,6 +44,15 @@ main {
   margin: 1.3rem;
 }
 
+p {
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+span {
+  cursor: pointer;
+}
+
 .all-btn {
   display: flex;
   justify-content: space-between;
